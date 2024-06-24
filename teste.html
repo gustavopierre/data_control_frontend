@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha SPA</title>
+    <style>
+        /* CSS aqui */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px;
+            cursor: pointer;
+        }
+        li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minha SPA</h1>
+    <div id="form-container" class="hidden">
+        <form id="data-form">
+            <input type="text" id="name" placeholder="Nome" required>
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
+    <button id="new-data-btn">Novo Dado</button>
+    <ul id="data-list"></ul>
+
+    <script>
+        // JavaScript aqui
+        document.addEventListener('DOMContentLoaded', () => {
+            const formContainer = document.getElementById('form-container');
+            const dataForm = document.getElementById('data-form');
+            const newDataBtn = document.getElementById('new-data-btn');
+            const dataList = document.getElementById('data-list');
+            let data = [];
+            let selectedDataIndex = null;
+
+            newDataBtn.addEventListener('click', () => {
+                formContainer.classList.remove('hidden');
+                dataForm.reset();
+                selectedDataIndex = null;
+            });
+
+            dataForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                if (selectedDataIndex !== null) {
+                    data[selectedDataIndex] = { name };
+                } else {
+                    data.push({ name });
+                }
+                updateDataList();
+                formContainer.classList.add('hidden');
+            });
+
+            const updateDataList = () => {
+                dataList.innerHTML = '';
+                data.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = item.name;
+                    li.addEventListener('click', () => {
+                        selectedDataIndex = index;
+                        document.getElementById('name').value = item.name;
+                        formContainer.classList.remove('hidden');
+                    });
+                    dataList.appendChild(li);
+                });
+            };
+        });
+    </script>
+</body>
+</html>
