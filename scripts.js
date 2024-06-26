@@ -4,13 +4,16 @@
   --------------------------------------------------------------------------------------
 */
 const getList = async () => {
-  let url = 'http://127.0.0.1:5000/produtos';
+  let url = 'http://127.0.0.1:5000/dataset';
   fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.produtos.forEach(item => insertList(item.nome, item.quantidade, item.valor))
+      data.dataset.forEach(item => insertList(item.name, item.area, item.format, 
+        item.description, item.creator, item.source, item.permitted, item.copyright, 
+        item.link, item.info, item.coordinatesystem, item.creationdate, 
+        item.updatedate, item.updatedate, item.checkdate))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -30,11 +33,25 @@ getList()
   Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputProduct, inputQuantity, inputPrice) => {
+const postItem = async (inputName, inputArea, inputFormat,
+  inputDescription, inputCreator, inputSource, inputPermitted, inputCopyRight,
+  inputLink, inputInfo, inputCoordinateSystem, inputCreationDate,
+  inputUpdateDate, inputCheckDate) => {
   const formData = new FormData();
-  formData.append('nome', inputProduct);
-  formData.append('quantidade', inputQuantity);
-  formData.append('valor', inputPrice);
+  formData.append('name', inputName);
+  formData.append('area', inputArea);
+  formData.append('format', inputFormat);
+  formData.append('description', inputDescription);
+  formData.append('creator', inputCreator);
+  formData.append('source', inputSource);
+  formData.append('permitted', inputPermitted);
+  formData.append('copyRight', inputCopyRight);
+  formData.append('link', inputLink);
+  formData.append('info', inputInfo);
+  formData.append('coordinateSystem', inputCoordinateSystem);
+  formData.append('creationDate', inputCreationDate);
+  formData.append('updateDate', inputUpdateDate);
+  formData.append('checkDate', inputCheckDate);
 
   let url = 'http://127.0.0.1:5000/produto';
   fetch(url, {
@@ -75,10 +92,10 @@ const removeElement = () => {
     close[i].onclick = function () {
       let div = this.parentElement.parentElement;
       const nomeItem = div.getElementsByTagName('td')[0].innerHTML
-      if (confirm("Você tem certeza?")) {
+      if (confirm("Are you sure?")) {
         div.remove()
         deleteItem(nomeItem)
-        alert("Removido!")
+        alert("Deleted!")
       }
     }
   }
@@ -89,9 +106,9 @@ const removeElement = () => {
   Função para deletar um item da lista do servidor via requisição DELETE
   --------------------------------------------------------------------------------------
 */
-const deleteItem = (item) => {
-  console.log(item)
-  let url = 'http://127.0.0.1:5000/produto?nome=' + item;
+const deleteItem = (name) => {
+  console.log(name)
+  let url = 'http://127.0.0.1:5000/data?name=' + name;
   fetch(url, {
     method: 'delete'
   })
@@ -106,19 +123,35 @@ const deleteItem = (item) => {
   Função para adicionar um novo item com nome, quantidade e valor 
   --------------------------------------------------------------------------------------
 */
-const newItem = () => {
-  let inputProduct = document.getElementById("newInput").value;
-  let inputQuantity = document.getElementById("newQuantity").value;
-  let inputPrice = document.getElementById("newPrice").value;
-
-  if (inputProduct === '') {
-    alert("Escreva o nome de um item!");
+const newData = () => {
+  let inputProduct = document.getElementById("newData").value;
+  let inputQuantity = document.getElementById("newFormat").value;
+  let inputPrice = document.getElementById("newDescription").value;
+  let inputCreator = document.getElementById("newCreator").value;
+  let inputSource = document.getElementById("newSource").value;
+  let inputPermitted = document.getElementById("newPermitted").value;
+  let inputCopyRight = document.getElementById("newCopyRight").value;
+  let inputLink = document.getElementById("newLink").value;
+  let inputInfo = document.getElementById("newInfo").value;
+  let inputCoordinateSystem = document.getElementById("newCoordinateSystem").value;
+  let inputCreationDate = document.getElementById("newCreationDate").value;
+  let inputUpdateDate = document.getElementById("newUpdateDate").value;
+  let inputCheckDate = document.getElementById("newCheckDate").value;
+  
+  if (inputData === '') {
+    alert("Write a data!");
   } else if (isNaN(inputQuantity) || isNaN(inputPrice)) {
     alert("Quantidade e valor precisam ser números!");
   } else {
-    insertList(inputProduct, inputQuantity, inputPrice)
-    postItem(inputProduct, inputQuantity, inputPrice)
-    alert("Item adicionado!")
+    insertList(inputData, inputFormat, inputCreator, inputSource, 
+      inputPermitted, inputCopyRight, inputLink, inputInfo, 
+      inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+      inputCheckDate)
+    postItem(inputData, inputFormat, inputCreator, inputSource, 
+      inputPermitted, inputCopyRight, inputLink, inputInfo, 
+      inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+      inputCheckDate)
+    alert("Data added!")
   }
 }
 
@@ -127,19 +160,33 @@ const newItem = () => {
   Função para inserir items na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (nameProduct, quantity, price) => {
-  var item = [nameProduct, quantity, price]
+const insertList = (name, format,description, creator,
+  source, permitted, copyRight, link, info, coordinateSystem,
+  creationDate, updateDate, checkDate) => {
+  var item = [name, format, description, creator, source, 
+    permitted, copyRight, link, info, coordinateSystem, 
+    creationDate, updateDate, checkDate]
   var table = document.getElementById('myTable');
   var row = table.insertRow();
-
+  
   for (var i = 0; i < item.length; i++) {
     var cel = row.insertCell(i);
     cel.textContent = item[i];
   }
   insertButton(row.insertCell(-1))
-  document.getElementById("newInput").value = "";
-  document.getElementById("newQuantity").value = "";
-  document.getElementById("newPrice").value = "";
-
+  document.getElementById("newData").value = "";
+  document.getElementById("newFormat").value = "";
+  document.getElementById("newDescription").value = "";
+  document.getElementById("newCreator").value = "";
+  document.getElementById("newSource").value = "";
+  document.getElementById("newPermitted").value = "";
+  document.getElementById("newCopyRight").value = "";
+  document.getElementById("newLink").value = "";
+  document.getElementById("newInfo").value = "";
+  document.getElementById("newCoordinateSystem").value = "";
+  document.getElementById("newCreationDate").value = "";
+  document.getElementById("newUpdateDate").value = "";
+  document.getElementById("newCheckDate").value = "";
+  
   removeElement()
 }
