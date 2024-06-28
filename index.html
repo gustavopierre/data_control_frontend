@@ -7,11 +7,11 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>DataProject</title>
+    <title>DatasetProject</title>
 </head>
 
 <body>
-     <!-- Cabeçalho de informações do sistema -->
+     <!-- Header with system information -->
     <header>
         <div class="title">
             <h1>Dataset</h1>
@@ -22,14 +22,13 @@
         </div>
     </header>
 
-     <!-- Opções para adicionar um novo item -->
-    <section class="newItem">
+     <!-- Options to ad a new data -->
+    <section class="newData">
         <input type="text" id="newName" placeholder="Add new Data:">
         <input type="text" id="newArea" placeholder="Area:">
-        <input type="text" id="newFormat" placeholder="Format:">
         <input type="text" id="newDescription" placeholder="Description:">
-        <input type="text" id="newCreator" placeholder="Creator:">
         <input type="text" id="newSource" placeholder="Source:">
+        <input type="text" id="newCreator" placeholder="Creator:">
         <input type="text" id="newPermitted" placeholder="Permitted:">
         <input type="text" id="newCopyright" placeholder="Copyright:">
         <input type="text" id="newLink" placeholder="Link:">
@@ -37,28 +36,23 @@
         <input type="text" id="newCoordinateSystem" placeholder="Coordinate System:">
         <input type="text" id="newCreationDate" placeholder="Creation Date:">
         <input type="text" id="newUpdateDate" placeholder="Update Date:">
-        <input type="text" id="newCaheckDate" placeholder="Check Date:">
-        <button onclick="newItem()" class="addBtn">Add</button>
+        <input type="text" id="newCheckDate" placeholder="Check Date:">
+        <input type="text" id="newFormat" placeholder="Format:">
+        <button onclick="newData()" class="addBtn">Add</button>
     </section>
 
-    <!-- Tabela com items existentes -->
-    <section class="items">
+    <!-- table with existing data -->
+    <section class="itens">
         <table id="myTable">
             <tr>
                 <th>Name</th>
                 <th>Area</th>
-                <th>Format</th>
-                <th>Description</th>
-                <th>Creator</th>
-                <th>Source</th>
                 <th>Permitted</th>
-                <th>Copyright</th>
-                <th>Link</th>
-                <th>Info</th>
                 <th>Coordinate System</th>
-                <th>Creation Date</th>
-                <th>Update Date</th>
-                <th>Check Date</th>
+                <th>Last Check</th>
+                <th>Format</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
                 <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
             </tr>
         </table>
