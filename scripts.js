@@ -59,7 +59,15 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
     method: 'post',
     body: formData
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        insertList(inputName, inputArea, inputDescription, inputSource, 
+          inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
+          inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+          inputCheckDate, inputFormat)
+          alert("Data added!")
+      }
+    })
     .catch((error) => {
       console.error('Error:', error);
     });
@@ -198,6 +206,8 @@ const insertList = (name, area, description, source, creator, permitted,
     var cel = row.insertCell(i);
     cel.textContent = data[i];
   }
+  insertButton(row.insertCell(-1))
+  insertButton(row.insertCell(-1))
   insertButton(row.insertCell(-1))
   document.getElementById("newName").value = "";
   document.getElementById("newArea").value = "";
