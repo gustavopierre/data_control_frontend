@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Project</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <header>
+        <h1>Dataset Project</h1>
+    </header>
+    <div id="main-content">
+        <main>
+            <div class="buttons">
+                <button id="all-registers" class="radio-button selected">All Registers</button>
+                <button id="all-ireland" class="radio-button">All Ireland</button>
+                <button id="roi" class="radio-button">ROI</button>
+                <button id="ni" class="radio-button">NI</button>
+                <button id="uk" class="radio-button">UK</button>
+                <button id="brazil" class="radio-button">Brazil</button>
+            </div>
+            <div class="sub-buttons"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Area</th>
+                        <th>Format</th>
+                        <th>Permitted</th>
+                        <th>Check</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplo de linhas -->
+                    <tr>
+                        <td>Exemplo de dado 1</td>
+                        <td>Área 1</td>
+                        <td>Formato 1</td>
+                        <td>Permitido</td>
+                        <td>x days</td>
+                        <td><button class="icon-button delete"></button></td>
+                        <td><button class="icon-button edit"></button></td>
+                        <td><button class="icon-button info"></button></td>
+                    </tr>
+                    <!-- Adicione mais 24 linhas aqui -->
+                </tbody>
+            </table>
+            <div class="navigation">
+                <button id="prev-page" disabled>Anterior</button>
+                <button id="next-page">Próximo</button>
+            </div>
+            <button id="new-data">New Data</button>
+        </main>
+    </div>
+    <div id="secondary-content" class="hidden">
+        <main>
+            <div id="new-data-details">
+                <p>Data: <input type="text" id="new-data-input"></p>
+                <p>Area: <input type="text" id="new-area-input"></p>
+                <p>Format: <input type="text" id="new-format-input"></p>
+                <p>Permitted: <input type="text" id="new-permitted-input"></p>
+                <button id="save-new-data" class="icon-button">Salvar</button>
+                <button id="cancel-new-data" class="icon-button">Cancelar</button>
+            </div>
+        </main>
+    </div>
+    <div id="info-content" class="hidden">
+        <main>
+            <div id="info-details"></div>
+            <button id="close-info" class="icon-button">Close</button>
+        </main>
+    </div>
+    <div id="edit-content" class="hidden">
+        <main>
+            <div id="edit-details"></div>
+            <button id="save-edit" class="icon-button">Salvar</button>
+            <button id="cancel-edit" class="icon-button">Cancelar</button>
+        </main>
+    </div>
+    <footer>
+        <p>© 2024 Dataset Project</p>
+    </footer>
+    <script src="script2.js"></script>
+</body>
+</html>

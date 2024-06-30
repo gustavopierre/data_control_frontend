@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header, footer {
+    background-color: #0433BF;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+main {
+    padding: 80px 20px 60px; /* Ajuste para evitar sobreposição com header e footer */
+}
+
+.buttons, .sub-buttons {
+    margin-bottom: 10px; /* Reduz a distância entre as linhas de botões */
+    margin-top: 60px; /* Adiciona margem superior para ficar abaixo do header */
+}
+
+button {
+    background-color: #0597F2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #07B0F2;
+    box-shadow: none;
+}
+
+button:active {
+    background-color: #05DBF2;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.radio-button.selected {
+    background-color: #0433BF;
+}
+
+table {
+    width: auto;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 5px 10px; /* Diminui a altura das linhas */
+}
+
+th {
+    background-color: #0433BF;
+    color: white;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 90ch; /* Diminui a largura da coluna Data */
+    text-align: left;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 20ch; /* Diminui a largura da coluna Area */
+    text-align: left;
+}
+
+th:nth-child(3), td:nth-child(3),
+th:nth-child(4), td:nth-child(4),
+th:nth-child(5), td:nth-child(5),
+th:nth-child(6), td:nth-child(6),
+th:nth-child(7), td:nth-child(7),
+th:nth-child(8), td:nth-child(8),
+th:nth-child(9), td:nth-child(9) {
+    text-align: center;
+    width: 24px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #e0e0e0; /* Cor das linhas ímpares */
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin: 0 5px;
+    border-radius: 50%; /* Garante que os botões sejam circulares */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+}
+
+.icon-button:hover {
+    box-shadow: none;
+}
+
+.icon-button.delete {
+    background-image: url('delete-icon.png');
+}
+
+.icon-button.edit {
+    background-image: url('edit-icon.png');
+}
+
+.icon-button.info {
+    background-image: url('info-icon.png');
+}
+
+.icon-button.check {
+    background-image: url('check-icon.png');
+}
+
+.hidden {
+    display: none;
+}
+
+.navigation {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#new-data {
+    display: block;
+    margin: 0 auto;
+}
+
+#secondary-content, #info-content, #edit-content {
+    position: fixed;
+    top: 80px; /* Ajuste para ficar abaixo do header */
+    bottom: 60px; /* Ajuste para ficar acima do footer */
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 999; /* Garante que fique acima do conteúdo principal */
+}
+
+#secondary-content button, #info-content button, #edit-content button {
+    background-color: #0597F2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    min-width: 100px; /* Garante que os botões sejam largos o suficiente */
+    text-align: center;
+    height: 40px; /* Ajusta a altura dos botões */
+}
+
+#secondary-content button:hover, #info-content button:hover, #edit-content button:hover {
+    background-color: #07B0F2;
+    box-shadow: none;
+}
+
+#secondary-content button:active, #info-content button:active, #edit-content button:active {
+    background-color: #05DBF2;
+}
