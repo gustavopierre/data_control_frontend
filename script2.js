@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <td>Exemplo de dado ${i}</td>
             <td>Área ${i}</td>
             <td>Formato ${i}</td>
-            <td>Permitido</td>
+            <td>Yes</td>
+            <td>ITM</td>
             <td>x days</td>
             <td><button class="icon-button delete"></button></td>
             <td><button class="icon-button edit"></button></td>

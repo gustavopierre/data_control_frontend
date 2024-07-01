@@ -27,6 +27,7 @@ main {
     padding: 80px 20px 60px; /* Ajuste para evitar sobreposição com header e footer */
 }
 
+
 .buttons, .sub-buttons {
     margin-bottom: 10px; /* Reduz a distância entre as linhas de botões */
     margin-top: 60px; /* Adiciona margem superior para ficar abaixo do header */

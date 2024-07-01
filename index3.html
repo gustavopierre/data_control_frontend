@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles3.css">
+    <title>Dataset Control Project</title>
+</head>
+<body>
+    <header>
+        <h1>Dataset Control Project</h1>
+    </header>
+
+     <!-- Options to ad a new data -->
+     <section class="newData">
+        <input type="text" id="newName" placeholder="Add new Data:">
+        <input type="text" id="newArea" placeholder="Area:">
+        <input type="text" id="newDescription" placeholder="Description:">
+        <input type="text" id="newSource" placeholder="Source:">
+        <input type="text" id="newCreator" placeholder="Creator:">
+        <input type="text" id="newPermitted" placeholder="Permitted:">
+        <input type="text" id="newCopyright" placeholder="Copyright:">
+        <input type="text" id="newLink" placeholder="Link:">
+        <input type="text" id="newInfo" placeholder="Info:">
+        <input type="text" id="newCoordinateSystem" placeholder="Coordinate System:">
+        <input type="text" id="newCreationDate" placeholder="Creation Date:">
+        <input type="text" id="newUpdateDate" placeholder="Update Date:">
+        <input type="text" id="newCheckDate" placeholder="Check Date:">
+        <input type="text" id="newFormat" placeholder="Format:">
+        <button onclick="newData()" class="addBtn">Add</button>
+    </section>
+
+    <!-- table with existing data -->
+    <section class="itens">
+        <table id="myTable">
+            <tr>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Permitted</th>
+                <th>Coordinate System</th>
+                <th>Last Check</th>
+                <th>Format</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    
+    <section>
+        <button id="all-ireland">All Ireland</button>
+        <button id="roi">ROI</button>
+        <button id="ni">NI</button>
+        <button id="uk">UK</button>
+        <button id="brazil">Brazil</button>
+    </section>
+    
+
+        
+</body>
+</html>

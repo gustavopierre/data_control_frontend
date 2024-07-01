@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Project</title>
+    <link rel="stylesheet" href="styles_test4.css">
+</head>
+<body>
+    <header>
+        <h1>Dataset Project</h1>
+    </header>
+    <main>
+        <div class="buttons">
+            <button id="all-ireland">All Ireland</button>
+            <button id="roi">ROI</button>
+            <button id="ni">NI</button>
+            <button id="uk">UK</button>
+            <button id="brazil">Brazil</button>
+        </div>
+        <div class="sub-buttons"></div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Format</th>
+                        <th>Permitted</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplo de registros -->
+                    <tr>
+                        <td>Exemplo de dado 1</td>
+                        <td>Formato 1</td>
+                        <td>Sim</td>
+                        <td><button class="icon-button"><i class="trash-icon"></i></button></td>
+                        <td><button class="icon-button"><i class="edit-icon"></i></button></td>
+                        <td><button class="icon-button"><i class="info-icon"></i></button></td>
+                    </tr>
+                    <!-- Adicione mais 24 registros aqui -->
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="prev-page" disabled>Anterior</button>
+            <button id="next-page">Próximo</button>
+        </div>
+        <button id="new-data">New Data</button>
+    </main>
+    <footer>
+        <p>© 2024 Dataset Project</p>
+    </footer>
+    <script src="script_test4.js"></script>
+</body>
+</html>

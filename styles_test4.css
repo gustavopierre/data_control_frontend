@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header, footer {
+    background-color: #0433BF;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.buttons button {
+    background-color: #0597F2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #07B0F2;
+}
+
+.buttons button:active {
+    background-color: #05DBF2;
+}
+
+.sub-buttons button {
+    background-color: #05F2DB;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #0433BF;
+    color: white;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+tbody td {
+    padding: 5px 10px; /* Diminuir a altura das linhas */
+}
+
+thead th:nth-child(1), tbody td:nth-child(1) {
+    text-align: left;
+    width: 40%;
+}
+
+thead th:nth-child(2), tbody td:nth-child(2),
+thead th:nth-child(3), tbody td:nth-child(3) {
+    text-align: center;
+    width: 15%;
+}
+
+thead th:nth-child(4), thead th:nth-child(5), thead th:nth-child(6),
+tbody td:nth-child(4), tbody td:nth-child(5), tbody td:nth-child(6) {
+    width: 5%;
+    text-align: center;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 30px; /* Garantir que o botão seja um círculo */
+    height: 30px; /* Garantir que o botão seja um círculo */
+}
+
+.icon-button:hover {
+    box-shadow: none;
+}
+
+.icon-button .trash-icon::before {
+    content: '🗑️';
+}
+
+.icon-button .edit-icon::before {
+    content: '✏️';
+}
+
+.icon-button .info-icon::before {
+    content: 'ℹ️';
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #0597F2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#new-data {
+    background-color: #0597F2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px auto;
+    display: block;
+    cursor: pointer;
+}
+
+#new-data:hover {
+    background-color: #07B0F2;
+}
+
+#new-data:active {
+    background-color: #05DBF2;
+}

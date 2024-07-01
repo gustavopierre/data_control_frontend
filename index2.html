@@ -2,11 +2,15 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dataset Project</title>
+    -- Seu CSS personalizado -->
     <link rel="stylesheet" href="styles2.css">
+   
 </head>
 <body>
+    <!-- Header with system information -->
     <header>
         <h1>Dataset Project</h1>
     </header>
@@ -28,7 +32,8 @@
                         <th>Area</th>
                         <th>Format</th>
                         <th>Permitted</th>
-                        <th>Check</th>
+                        <th>CoordSystem</th>
+                        <th>LastCheck</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -41,18 +46,20 @@
                         <td>Exemplo de dado 1</td>
                         <td>Área 1</td>
                         <td>Formato 1</td>
-                        <td>Permitido</td>
+                        <td>Yes</td>
+                        <td>ITM</td>
                         <td>x days</td>
-                        <td><button class="icon-button delete"></button></td>
-                        <td><button class="icon-button edit"></button></td>
-                        <td><button class="icon-button info"></button></td>
+                        <td><button class="icon-button"><i class="fas fa-check" style="color: green;"></i></button></td>
+                        <td><button class="icon-button"><i class="fas fa-trash" style="color: red;"></i></button></td>
+                        <td><button class="icon-button"><i class="fas fa-edit" style="color: blue;"></i></button></td>
+                        <td><button class="icon-button"><i class="fas fa-info-circle" style="color: yellow;"></i></button></td>
                     </tr>
                     <!-- Adicione mais 24 linhas aqui -->
                 </tbody>
             </table>
             <div class="navigation">
-                <button id="prev-page" disabled>Anterior</button>
-                <button id="next-page">Próximo</button>
+                <button id="prev-page" disabled>Previous</button>
+                <button id="next-page">Next</button>
             </div>
             <button id="new-data">New Data</button>
         </main>
