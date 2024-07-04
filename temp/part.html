@@ -1,0 +1,38 @@
+<tbody>
+    <!-- Exemplo de linha -->
+    <tr>
+        <td>Exemplo de dado 1</td>
+        <td>Área 1</td>
+        <td>Yes</td>
+        <td>ITM</td>
+        <td>shp</td>
+        <td>x days</td>
+        <td><button class="icon-button"><img src="img/check_green.png" alt="Check" hint="Check"></button></td>
+        <td><button class="icon-button"><img src="img/trash-bin.png" alt="Trash" hint="Delete"></button></td>
+        <td><button class="icon-button"><img src="img/pen.png" alt="Edit" hint="Data Edition"></button></td>
+        <td><button class="icon-button"><img src="img/information.png" alt="Info" hint="Data information"></button></td>
+    </tr>
+</tbody>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Seleciona o botão pelo ID
+    const openNewDataButton = document.getElementById('openNewDataButton');
+  
+    // Adiciona um ouvinte de eventos de clique ao botão
+    openNewDataButton.addEventListener('click', function() {
+      // Seleciona as divs pelo ID
+      const newDataContent = document.getElementById('newDataContent');
+      const mainContent = document.getElementById('mainContent');
+      const infoDataContent = document.getElementById('infoDataContent');
+      const editDataContent = document.getElementById('editDataContent');
+  
+      // Remove a classe 'hidden' de newDataContent para torná-la visível
+      if (newDataContent) newDataContent.classList.remove('hidden');
+  
+      // Adiciona a classe 'hidden' às outras divs para escondê-las
+      if (mainContent) mainContent.classList.add('hidden');
+      if (infoDataContent) infoDataContent.classList.add('hidden');
+      if (editDataContent) editDataContent.classList.add('hidden');
+    });
+  });

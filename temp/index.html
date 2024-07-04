@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>DatasetProject</title>
+</head>
+
+<body>
+     <!-- Header with system information -->
+    <header>
+        <div class="title">
+            <h1>Dataset</h1>
+        </div>
+        <div class="banner">
+            <img src="https://images.contentstack.io/v3/assets/blt45c082eaf9747747/bltbcca43584b660977/5de0b6aa703bd50385f981ad/Header-5.jpg?width=1200&height=630&fit=crop"
+                alt="y">
+        </div>
+    </header>
+
+     <!-- Options to ad a new data -->
+    <section class="newData">
+        <input type="text" id="newName" placeholder="Add new Data:">
+        <input type="text" id="newArea" placeholder="Area:">
+        <input type="text" id="newDescription" placeholder="Description:">
+        <input type="text" id="newSource" placeholder="Source:">
+        <input type="text" id="newCreator" placeholder="Creator:">
+        <input type="text" id="newPermitted" placeholder="Permitted:">
+        <input type="text" id="newCopyright" placeholder="Copyright:">
+        <input type="text" id="newLink" placeholder="Link:">
+        <input type="text" id="newInfo" placeholder="Info:">
+        <input type="text" id="newCoordinateSystem" placeholder="Coordinate System:">
+        <input type="text" id="newCreationDate" placeholder="Creation Date:">
+        <input type="text" id="newUpdateDate" placeholder="Update Date:">
+        <input type="text" id="newCheckDate" placeholder="Check Date:">
+        <input type="text" id="newFormat" placeholder="Format:">
+        <button onclick="newData()" class="addBtn">Add</button>
+    </section>
+
+    <!-- table with existing data -->
+    <section class="itens">
+        <table id="myTable">
+            <tr>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Permitted</th>
+                <th>Coordinate System</th>
+                <th>Last Check</th>
+                <th>Format</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+            </tr>
+        </table>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
+
+
