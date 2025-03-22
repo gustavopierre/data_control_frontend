@@ -12,7 +12,7 @@ const getList = async () => {
     .then((data) => {
       data.dataset.forEach(item => insertList(item.name, item.area, 
         item.permitted, item.coordinate_system, item.check_date, 
-        item.format))
+        item.format, item.source))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -73,7 +73,7 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
     .catch((error) => {
       console.error('Error:', error);
     });
-}
+} 
 
 
 /*
@@ -139,7 +139,7 @@ const insertButtonDelete = (parent) => {
 
   // Criar o elemento img
   let img = document.createElement("img");
-  img.src = "img/trash-bin.png";
+  img.src = "img/close.png";
   img.alt = "Button with a trash bin icon";
   img.title = "Delete"; // Usando title como hint
 
@@ -197,6 +197,37 @@ const insertButtonInfo = (parent) => {
   button.appendChild(img);
 
   // Anexar button ao elemento pai
+  parent.appendChild(button);
+};
+
+/*
+  --------------------------------------------------------------------------------------
+  Function to create a view button with eye icon
+  for each item in the list 
+  --------------------------------------------------------------------------------------
+*/
+const insertButtonView = (parent, format) => {
+  // Create the button element
+  let button = document.createElement("button");
+  button.className = "icon-button-view";
+  button.onclick = showMap;
+
+  //verify if the source is WMS or WFS
+  if (format !== "WMS" && format !== "WFS") {
+    button.disabled = true;
+    button.title = "Format not supported for view";
+  }
+
+  // Create the img element
+  let img = document.createElement("img");
+  img.src = "img/view.png";
+  img.alt = "Button with eye icon";
+  img.title = "View"; // Using title as hint
+
+  // Append img to button
+  button.appendChild(img);
+
+  // Append button to parent element
   parent.appendChild(button);
 };
 
@@ -335,6 +366,10 @@ function showEdit() {
   alert("Function not implemented yet!")
 }
 
+function showMap() {
+  alert("Function not implemented yet!")
+}
+
 function checkData() {
   alert("Function not implemented yet!")
 }
@@ -361,7 +396,7 @@ function calculateDateDifferenceDays(checkDate) {
   --------------------------------------------------------------------------------------
 */
 const insertList = (name, area, permitted, coordinateSystem, 
-  checkDate, format) => {
+  checkDate, format, source) => {
   
   var data = [name, area, permitted, coordinateSystem, format, checkDate];
 
@@ -386,6 +421,7 @@ const insertList = (name, area, permitted, coordinateSystem,
   insertButtonDelete(row.insertCell(-1))
   insertButtonEdit(row.insertCell(-1))
   insertButtonInfo(row.insertCell(-1))
+  insertButtonView(row.insertCell(-1), format)
 
   // Mostra somente a div com a tabela visivel
   document.getElementById("newName").value = "";
