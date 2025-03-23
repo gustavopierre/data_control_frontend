@@ -206,11 +206,14 @@ const insertButtonInfo = (parent) => {
   for each item in the list 
   --------------------------------------------------------------------------------------
 */
-const insertButtonView = (parent, format) => {
+const insertButtonView = (parent, format, source) => {
   // Create the button element
   let button = document.createElement("button");
   button.className = "icon-button-view";
-  button.onclick = showMap;
+  button.onclick = () => {
+    console.log("Source: ", source);
+    showMap(source)
+  };
 
   //verify if the source is WMS or WFS
   if (format !== "WMS" && format !== "WFS") {
@@ -366,9 +369,52 @@ function showEdit() {
   alert("Function not implemented yet!")
 }
 
-function showMap() {
-  alert("Function not implemented yet!")
-}
+function showMap(source) {
+  if (!source) {
+    alert("Function not implemented yet!")
+    return;
+  }
+
+  //Open a new window with the map
+  const mapWindow = window.open(source, '_blank', "width=800, height=600");
+  mapWindow.document.write(`
+    <html>
+      <head>
+        <title>Map Viewer</title>
+        <style>
+          #map {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+      </head>
+      <body>
+        <div id="map"></div>
+        <script>
+          const map = L.map('map').setView([0, 0], 2); // Inicializa o mapa
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+          }).addTo(map);
+
+          // Adiciona os dados da API como camada
+          fetch('${source}')
+            .then(response => response.json())
+            .then(data => {
+              const geoJsonLayer = L.geoJSON(data);
+              geoJsonLayer.addTo(map);
+              map.fitBounds(geoJsonLayer.getBounds()); // Ajusta o zoom para os dados
+            })
+            .catch(error => {
+              console.error('Error loading map data:', error);
+              alert('Failed to load map data.');
+            });
+        </script>
+      </body>
+    </html>
+    `);
+  }
 
 function checkData() {
   alert("Function not implemented yet!")
@@ -389,6 +435,8 @@ function calculateDateDifferenceDays(checkDate) {
   // Retornar a string formatada
   return differenceInDaysAdjusted;
 }
+
+
 
 /*
   --------------------------------------------------------------------------------------
@@ -421,7 +469,7 @@ const insertList = (name, area, permitted, coordinateSystem,
   insertButtonDelete(row.insertCell(-1))
   insertButtonEdit(row.insertCell(-1))
   insertButtonInfo(row.insertCell(-1))
-  insertButtonView(row.insertCell(-1), format)
+  insertButtonView(row.insertCell(-1), format, source)
 
   // Mostra somente a div com a tabela visivel
   document.getElementById("newName").value = "";
