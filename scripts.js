@@ -10,6 +10,7 @@ const getList = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log("Data received from server:", data);
       data.dataset.forEach(item => insertList(item.name, item.area, 
         item.permitted, item.coordinate_system, item.check_date, 
         item.format, item.source))
@@ -61,7 +62,8 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
     .then((response) => {
       if (response.ok) {
         insertList(inputName, inputArea, inputPermitted, inputCoordinateSystem, inputCheckDate, inputFormat)
-          alert("Data added!")
+        alert("Data added!")
+        //getList()
       }
       else if (response.status == 409) {
         alert("Existing a Data with same name!")
@@ -210,13 +212,21 @@ const insertButtonView = (parent, format, source) => {
   // Create the button element
   let button = document.createElement("button");
   button.className = "icon-button-view";
-  button.onclick = () => {
-    console.log("Source: ", source);
-    showMap(source)
-  };
 
-  //verify if the source is WMS or WFS
-  if (format !== "WMS" && format !== "WFS") {
+  //check if the source is defined before to set the onclick event
+  if(!source) {
+    console.warn("Source is missing for view button");
+    button.disabled = true;
+    button.title = "Source is missing!";
+  } else {
+    button.onclick = () => {
+      console.log("Source: ", source);
+      showMap(source)
+    };
+  }
+
+  //verify if the source is WFS
+  if (format !== "WFS") {
     button.disabled = true;
     button.title = "Format not supported for view";
   }
@@ -371,12 +381,89 @@ function showEdit() {
 
 function showMap(source) {
   if (!source) {
-    alert("Function not implemented yet!")
+    alert("Source is missing!")
     return;
   }
+  // Add the query endpoint to the source URL
+  const queryUrl = `${source}/query`;
+  const params = new URLSearchParams({
+    where: "1=1",
+    outFields: "*",
+    f: "json", // Formato JSON
+    outSR: 4326,
+    resultRecordCount: 1000
+  });
 
+  console.log("Query URL:", `${queryUrl}?${params.toString()}`);
+  // Request the data from the source with the query parameters
+  fetch(`${queryUrl}?${params.toString()}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to load map data from ${queryUrl}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Exibir o JSON original no console
+      console.log("Original JSON:", data);
+      //transform the data to GeoJSON format
+      const geoJsonData = {
+        type: 'FeatureCollection',
+        features: data.features.map(item => {
+          let geometry = null;
+
+          // convertion based on the geometry type
+          switch (data.geometryType) {
+            case "esriGeometryPoint":
+              geometry = {
+                type: 'Point',
+                coordinates: [item.geometry.x, item.geometry.y]
+              };
+              break;
+            case "esriGeometryMultipoint":
+              geometry = {
+                type: 'Multipoint',
+                coordinates: item.geometry.points
+              };
+              break;
+            case 'esriGeometryPolyline':
+              geometry = {
+                type: 'MultiLineString',
+                coordinates: item.geometry.paths
+              };
+              break;
+            case 'esriGeometryPolygon':
+              geometry = {
+                type: 'Polygon',
+                coordinates: item.geometry.rings
+              };
+              break;
+            default:
+              console.warn('Unsupported geometry type:', item.geometryType);
+              return null;
+          }
+        
+          
+          if (!item.geometry || !item.attributes) {
+            console.warn("Invalid feature:", item);
+            return null;
+          }
+          return {
+            type: "Feature",
+            geometry: geometry,
+            properties: item.attributes
+          };
+        }).filter(feature => {
+          if (feature.geometry === null) {
+            console.warn("Discarded feature with null geometry:", feature);
+            return false;
+          }
+          return true;
+        })
+      };
+  console.log("Generated GeoJSON:", geoJsonData); // Verificar o GeoJSON gerado  
   //Open a new window with the map
-  const mapWindow = window.open(source, '_blank', "width=800, height=600");
+  const mapWindow = window.open("", '_blank', "width=800, height=600");
   mapWindow.document.write(`
     <html>
       <head>
@@ -398,23 +485,25 @@ function showMap(source) {
             maxZoom: 19,
           }).addTo(map);
 
-          // Adiciona os dados da API como camada
-          fetch('${source}')
-            .then(response => response.json())
-            .then(data => {
-              const geoJsonLayer = L.geoJSON(data);
-              geoJsonLayer.addTo(map);
-              map.fitBounds(geoJsonLayer.getBounds()); // Ajusta o zoom para os dados
-            })
-            .catch(error => {
-              console.error('Error loading map data:', error);
-              alert('Failed to load map data.');
-            });
+          // Add GeoJSON data to the map
+          const geoJsonLayer = L.geoJSON(${JSON.stringify(geoJsonData)});
+          geoJsonLayer.addTo(map);
+          if (geoJsonLayer.getBounds().isValid()) {
+            map.fitBounds(geoJsonLayer.getBounds());
+          } else {
+            console.warn("No valid bounds found for GeoJSON data.");
+          }
         </script>
       </body>
     </html>
     `);
-  }
+  })
+  .catch(error => {
+    console.error('Error loading map data',error);
+    //alert("Failed to load map data.");
+    alert(`Failed to load map data.`);
+  });
+}
 
 function checkData() {
   alert("Function not implemented yet!")
@@ -531,3 +620,4 @@ function showInfoDataContent() {
   // Exibe a div infoDataContent
   document.getElementById('infoDataContent').classList.remove('hidden');
 }
+
