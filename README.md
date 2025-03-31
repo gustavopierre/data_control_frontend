@@ -9,6 +9,7 @@ Sua funcao e o frontend de um sistema de controle dos dados usados para serem ca
  - [Leaflet](https://leafletjs.com/reference.html)
  - [Docker](https://www.docker.com/)
 
+
 ## Como executar através do Docker
 
 Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instalado e em execução em sua máquina.
@@ -27,3 +28,37 @@ $ docker run -d -p 8080:80 nome_da_sua_imagem
 ```
 
 Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:8080/#/](http://localhost:8080/#/) no navegador.
+
+
+## Funcionamento dos Botões
+
+### Botão de Check Verde
+![Check Verde](src/img/check_green.png)
+- Indica que o dado foi verificado recentemente (menos de 90 dias).
+
+### Botão de Check Vermelho
+![Check Vermelho](src/img/check_red.png)
+- Indica que o dado não foi verificado recentemente (mais de 90 dias).
+
+### Botão de Deletar
+![Deletar](src/img/close.png)
+- Remove o dado da lista.
+
+### Botão de Editar
+![Editar](src/img/pen.png)
+- Permite editar as informações do dado. Funcao ainda nao implementada.
+
+### Botão de Informação
+![Informação](src/img/information.png)
+- Exibe informações detalhadas sobre o dado. Funcao ainda nao implementada.
+
+### Botão de Visualizar
+![Visualizar](src/img/view.png)
+- Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
+- A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso a API externa por conta do frontend.
+- As API externas sao de fontes reais utilizadas por empresas de Planejamento de Energia Renovavel para avaliacao de areas apropriadas para instalacao de fazendas solares e eolicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicacoes Planejadas na Irlanda.
+- As API externas tem format JSON de retorno, que e transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
+  
+### TODO List
+- Permitir a paginacao dos dados oriundos da API externa, sendo possivel exibir numeros elevados de registros no mapa, atulamente limitado a ate 2000 elementos.
+- Permitir um zoom na area dos dados da API externa quando eles sao exibidos.
