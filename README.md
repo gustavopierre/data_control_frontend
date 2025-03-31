@@ -33,29 +33,30 @@ Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:80
 ## Funcionamento dos Botões
 
 ### Botão de Check Verde
-![Check Verde](src/img/check_green.png)
+<img src="src/img/check_green.png" alt="Check Verde" width="20" height="20" />
 - Indica que o dado foi verificado recentemente (menos de 90 dias).
 
 ### Botão de Check Vermelho
-![Check Vermelho](src/img/check_red.png)
+<img src="src/img/check_red.png" alt="Check Vermelho" width="20" height="20" />
 - Indica que o dado não foi verificado recentemente (mais de 90 dias).
 
 ### Botão de Deletar
-![Deletar](src/img/close.png)
+<img src="src/img/close.png" alt="Deletar" width="20" height="20" />
 - Remove o dado da lista.
 
 ### Botão de Editar
-![Editar](src/img/pen.png)
+<img src="src/img/pen.png" alt="Editar" width="20" height="20" />
 - Permite editar as informações do dado. Funcao ainda nao implementada.
 
 ### Botão de Informação
-![Informação](src/img/information.png)
+<img src="src/img/information.png" alt="Informação" width="20" height="20" />
 - Exibe informações detalhadas sobre o dado. Funcao ainda nao implementada.
 
 ### Botão de Visualizar
-![Visualizar](src/img/view.png)
-- Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
-- A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso a API externa por conta do frontend.
+<img src="src/img/view.png" alt="Visualizar" width="20" height="20" />
+ - Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
+
+ - A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso a API externa por conta do frontend.
 - As API externas sao de fontes reais utilizadas por empresas de Planejamento de Energia Renovavel para avaliacao de areas apropriadas para instalacao de fazendas solares e eolicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicacoes Planejadas na Irlanda.
 - As API externas tem format JSON de retorno, que e transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
   
