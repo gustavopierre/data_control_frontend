@@ -4,7 +4,7 @@
   --------------------------------------------------------------------------------------
 */
 const getList = async () => {
-  let url = 'http://127.0.0.1:5000/dataset';
+  let url = 'http://localhost:5000/dataset';
   fetch(url, {
     method: 'get',
   })
@@ -54,7 +54,7 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
   formData.append('check_date', inputCheckDate);
   formData.append('format', inputFormat);
 
-  let url = 'http://127.0.0.1:5000/data';
+  let url = 'http://localhost:5000/data';
   fetch(url, {
     method: 'post',
     body: formData
@@ -280,7 +280,7 @@ function removeElement() {
 */
 const deleteItem = (name) => {
   console.log(name)
-  let url = 'http://127.0.0.1:5000/data?name=' + name;
+  let url = 'http://localhost:5000/data?name=' + name;
   fetch(url, {
     method: 'delete'
   })
@@ -319,7 +319,7 @@ function getElement() {
 */
 const getData = (name) => {
   console.log(name)
-  let url = 'http://127.0.0.1:5000/data?name=' + name;
+  let url = 'http://localhost:5000/data?name=' + name;
   fetch(url, {
     method: 'get'
   })
