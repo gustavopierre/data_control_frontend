@@ -1,7 +1,8 @@
-# Meu Front
-A aplicacao Data Control teve origem como MVP da Sprint  **Desenvolvimento Full Stack Básico** e foi complementado para atender o MVP da Sprint **Arquitetura de Software** do curso de Pos-Graduacao em Engenharia de Software da PUC-Rio.
+# Frontend Data Control
+A aplicação Data Control teve origem como MVP da Sprint **Desenvolvimento Full Stack Básico** e foi complementada para atender o MVP da Sprint **Arquitetura de Software** do curso de Pós-Graduação em Engenharia de Software da PUC-Rio.
 
-Sua funcao e o frontend de um sistema de controle dos dados usados para serem camadas (layers) nos softwares de geoprocessamento. As principais tecnologias utilizadas sao:
+Sua função é o frontend de um sistema de controle dos dados usados para serem camadas (layers) nos softwares de geoprocessamento. As principais tecnologias utilizadas são:
+
 ---
  - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
  - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
@@ -14,20 +15,19 @@ Sua funcao e o frontend de um sistema de controle dos dados usados para serem ca
 
 Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instalado e em execução em sua máquina.
 
-Navegue até o diretório que contém o Dockerfile no terminal e seus arquivos de aplicação e
-Execute **como administrador** o seguinte comando para construir a imagem Docker:
+Navegue até o diretório que contém o Dockerfile no terminal e seus arquivos de aplicação e execute **como administrador** o seguinte comando para construir a imagem Docker:
 
 ```
 $ docker build -t front_datacontrol .
 ```
 
-Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
+Uma vez criada a imagem, para executar o container basta executar, **como administrador**, o seguinte comando:
 
 ```
 $ docker run -d -p 8080:80 front_datacontrol
 ```
 
-Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:8080/](http://localhost:8080/) no navegador.
+Para acessar o frontend, basta abrir o [http://localhost:8080/](http://localhost:8080/) no navegador.
 
 
 ## Funcionamento dos Botões
@@ -42,11 +42,11 @@ Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:80
 
 ### Botão de Deletar
 <img src="src/img/close.png" alt="Deletar" width="20" height="20" />
-- Remove o dado da lista.
+- Remove o dado.
 
 ### Botão de Editar
 <img src="src/img/pen.png" alt="Editar" width="20" height="20" />
-- Permite editar as informações do dado. Funcao ainda nao implementada.
+- Permite editar as informações do dado. Função ainda não implementada.
 
 ### Botão de Informação
 <img src="src/img/information.png" alt="Informação" width="20" height="20" />
@@ -54,11 +54,12 @@ Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:80
 
 ### Botão de Visualizar
 <img src="src/img/view.png" alt="Visualizar" width="20" height="20" />
-- Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
+- Abre uma visualização do dado no mapa (apenas para dados do tipo Web Feature Server - WFS). O botao acessa a API externa constante no campo source do dado, converte o JSON em GeoJSON e exibe o dado num mapa.
 
-- A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso à API externa por conta do frontend.
-- As APIs externas são de fontes reais utilizadas por empresas de Planejamento de Energia Renovável para avaliação de áreas apropriadas para instalação de fazendas solares e eólicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicações Planejadas na Irlanda.
-- As APIs externas têm formato JSON de retorno, que é transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
+
+<br>A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso à API externa por conta do frontend.
+<br>As APIs externas são de fontes reais utilizadas por empresas de Planejamento de Energia Renovável para avaliação de áreas apropriadas para instalação de fazendas solares e eólicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicações Planejadas na Irlanda.
+<br>As APIs externas têm formato JSON de retorno, que é transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
   
 ### TODO List
 - Implementar as funcionalidades dos botões não implementadas ainda.
