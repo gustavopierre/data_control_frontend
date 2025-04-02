@@ -50,16 +50,17 @@ Uma vez executando, para acessar o front-end, basta abrir o [http://localhost:80
 
 ### Botão de Informação
 <img src="src/img/information.png" alt="Informação" width="20" height="20" />
-- Exibe informações detalhadas sobre o dado. Funcao ainda nao implementada.
+- Exibe informações detalhadas sobre o dado. Função ainda não implementada.
 
 ### Botão de Visualizar
 <img src="src/img/view.png" alt="Visualizar" width="20" height="20" />
- - Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
+- Abre uma visualização do dado no mapa (apenas para dado do tipo Web Feature Server - WFS).
 
- - A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso a API externa por conta do frontend.
-- As API externas sao de fontes reais utilizadas por empresas de Planejamento de Energia Renovavel para avaliacao de areas apropriadas para instalacao de fazendas solares e eolicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicacoes Planejadas na Irlanda.
-- As API externas tem format JSON de retorno, que e transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
+- A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso à API externa por conta do frontend.
+- As APIs externas são de fontes reais utilizadas por empresas de Planejamento de Energia Renovável para avaliação de áreas apropriadas para instalação de fazendas solares e eólicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicações Planejadas na Irlanda.
+- As APIs externas têm formato JSON de retorno, que é transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
   
 ### TODO List
-- Permitir a paginacao dos dados oriundos da API externa, sendo possivel exibir numeros elevados de registros no mapa, atulamente limitado a ate 2000 elementos.
-- Permitir um zoom na area dos dados da API externa quando eles sao exibidos.
+- Implementar as funcionalidades dos botões não implementadas ainda.
+- Permitir a paginação dos dados oriundos da API externa, sendo possível exibir números elevados de registros no mapa, atualmente limitado a até 2000 elementos.
+- Permitir um zoom na área dos dados da API externa quando eles são exibidos.
