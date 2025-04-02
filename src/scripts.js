@@ -391,7 +391,7 @@ function showMap(source) {
     outFields: "*",
     f: "json", // Formato JSON
     outSR: 4326,
-    resultRecordCount: 1000
+    resultRecordCount: 2000
   });
 
   console.log("Query URL:", `${queryUrl}?${params.toString()}`);
