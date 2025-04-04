@@ -259,11 +259,15 @@ function removeElement() {
   let i;
   for (i = 0; i < del.length; i++) {
     del[i].onclick = function () {
+      // Go to the parent element of the button and then to the parent element of the div
       let div = this.parentElement.parentElement;
+      // Get the content of the first cell (td) in the row (tr). It is the name of the data
       const dataName = div.getElementsByTagName('td')[0].innerHTML;
       console.log(dataName)
       if (confirm("Are you sure?")) {
+        // Call the function to delete the item from the server
         deleteItem(dataName);
+        // Call the function to delete the item from the list
         div.remove();
         
         alert("Deleted!");
