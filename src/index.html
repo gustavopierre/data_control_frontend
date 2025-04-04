@@ -96,6 +96,7 @@
                     <select id="newCoordinateSystem" name="newCoordinateSystem">
                         <option value="ITM">Irish Transverse Mercator (ITM)</option>
                         <option value="BNG">British National Grid (BNG)</option>
+                        <option value="TM75">Transverse Mercator 75 (TM75)</option>
                         <option value="WGS84">World Geodetic System 1984 (WGS84)</option>
                     </select>
                 </div>               
@@ -134,13 +135,13 @@
     
     <div id="editDataContent" class="hidden">
         <main>
-            <section class="newData">
+            <section class="editData">
                 <div class="field">
-                    <label for="newName" class="labelForm"><strong>Name of Data:*</strong></label>
-                    <input type="text" id="newName" maxlength="140" required>
+                    <label for="editName" class="labelForm"><strong>Name of Data:*</strong></label>
+                    <input type="text" id="editName" maxlength="140" required>
                 </div>
                 <div class="field">
-                    <label for="newArea" class="labelForm"><strong>What is its area?</strong></label><br>
+                    <label for="editArea" class="labelForm"><strong>What is its area?</strong></label><br>
                     <!-- Select one of the options below: 
                         All Ireland        
                         ROI - All, Carlow, Cavan, Clare, Cork, Donegal, Dublin, 
@@ -148,7 +149,7 @@
                             Longford, Louth, Mayo, Meath, Monaghan, Offaly, Roscommon, Sligo, 
                             Tipperary, Waterford, Westmeath, Wexford, Wicklow.
                             UK - All, England, Scotland, Wales. Northern Ireland-->
-                    <select id="newArea" name="area">
+                    <select id="editArea" name="area">
                         <option value="All Ireland">All Ireland</option>
                         <option value="ROI - All">ROI - All</option>
                         <option value="Carlow">Carlow</option>
@@ -185,23 +186,23 @@
                     </select>
                 </div>
                 <div class="field">
-                    <label for="newDescription" class="labelForm"><strong>Description:</strong></label>
-                    <input type="text" id="newDescription" maxlength="255">
+                    <label for="editDescription" class="labelForm"><strong>Description:</strong></label>
+                    <input type="text" id="editDescription" maxlength="255">
                 </div>
                 <div class="field">
-                    <label for="newLink" class="labelForm"><strong>Link:*</strong></label>
-                    <input type="text" id="newLink" maxlength="140">
+                    <label for="editLink" class="labelForm"><strong>Link:*</strong></label>
+                    <input type="text" id="editLink" maxlength="140">
                 </div>
                 <div class="field">
                     <label><strong>Is the use permitted?</strong></label>
-                    <input type="radio" id="yes" name="permitted" value="yes">
+                    <input type="radio" id="yes" name="permitted">
                     <label for="yes">Yes</label>
-                    <input type="radio" id="no" name="permitted" value="no">
+                    <input type="radio" id="no" name="permitted">
                     <label for="no">No</label>
                 </div>
                 <div class="field">
                     <label><strong>What is the data format?</strong></label><br>
-                    <select id="newFormat" name="newFormat">
+                    <select id="editFormat" name="newFormat">
                         <option value="SHP">Shapefile (SHP)</option>
                         <option value="GDB">Geodatabase (GDB)</option>
                         <option value="CSV">Comma-Separated Values (CSV)</option>
@@ -211,35 +212,36 @@
                 </div>
                 <div class="field">
                     <label><strong>What is the coordinate system of the data?</strong></label><br>
-                    <select id="newCoordinateSystem" name="newCoordinateSystem">
+                    <select id="editCoordinateSystem" name="editCoordinateSystem">
                         <option value="ITM">Irish Transverse Mercator (ITM)</option>
                         <option value="BNG">British National Grid (BNG)</option>
+                        <option value="TM75">Transverse Mercator 75 (TM75)</option>
                         <option value="WGS84">World Geodetic System 1984 (WGS84)</option>
                     </select>
                 </div>               
                 <div class="field">
-                    <label for="newSource" class="labelForm"><strong>Source:</strong></label>
-                    <input type="text" id="newSource" maxlength="140">
+                    <label for="editSource" class="labelForm"><strong>Source:</strong></label>
+                    <input type="text" id="editSource" maxlength="140">
                 </div>
                 <div class="field">
-                    <label for="newCreator" class="labelForm"><strong>Creator:</strong></label>
-                    <input type="text" id="newCreator" maxlength="140">
+                    <label for="editCreator" class="labelForm"><strong>Creator:</strong></label>
+                    <input type="text" id="editCreator" maxlength="140">
                 </div>
                 <div class="field">
-                    <label for="newCreationDate" class="labelForm"><strong>Creation Date:</strong></label>
-                    <input type="date" id="newCreationDate">
+                    <label for="editCreationDate" class="labelForm"><strong>Creation Date:</strong></label>
+                    <input type="date" id="editCreationDate">
                 </div>
                 <div class="field">
-                    <label for="newUpdateDate" class="labelForm"><strong>Update Date:</strong></label>
-                    <input type="date" id="newUpdateDate">
+                    <label for="editUpdateDate" class="labelForm"><strong>Update Date:</strong></label>
+                    <input type="date" id="editUpdateDate">
                 </div>
                 <div class="field">
-                    <label for="newCopyright" class="labelForm"><strong>Copyright:</strong></label>
-                    <input type="text" id="newCopyright" maxlength="140">    
+                    <label for="editCopyright" class="labelForm"><strong>Copyright:</strong></label>
+                    <input type="text" id="editCopyright" maxlength="140">    
                 </div>
                 <div class="field">
-                    <label for="newInfo" class="labelForm"><strong>Info:</strong></label>
-                    <input type="text" id="newInfo" maxlength="255">
+                    <label for="editInfo" class="labelForm"><strong>Info:</strong></label>
+                    <input type="text" id="editInfo" maxlength="255">
                 </div>
                 <div class="buttons">
                     <button onclick="saveData()" class="button">Save</button>
