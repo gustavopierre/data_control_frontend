@@ -281,7 +281,7 @@ function removeElement() {
   the click on the edit button
   --------------------------------------------------------------------------------------
 */
-function editElement() {
+/*function editElement() {
   // get the edit button elements
   let edit = document.getElementsByClassName("icon-button-edit");
   let i;
@@ -297,7 +297,7 @@ function editElement() {
       // Call the function to show the edit form
       showEditDataContent()
     }
-  }
+  }*/
 
 
 
@@ -391,13 +391,15 @@ const newData = () => {
   } else if (inputLink === '') {
     alert("Write the data link");
   } else {
-    // Call the function to insert the data in the server list
+      // Call the function to insert the data in the server list
     postData(inputName, inputArea, inputDescription, inputSource, 
       inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
       inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
       inputCheckDate, inputFormat)
+      
+    
     // Call the function to show the MainContent
-    showMainContent()
+    showMainContent() 
   }
   
    
