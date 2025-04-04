@@ -365,14 +365,17 @@ const newData = () => {
     alert("Write the data area");
   } else if (inputLink === '') {
     alert("Write the data link");
-  } 
+  } else {
+    // Call the function to insert the data in the server list
+    postData(inputName, inputArea, inputDescription, inputSource, 
+      inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
+      inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+      inputCheckDate, inputFormat)
+    // Call the function to show the MainContent
+    showMainContent()
+  }
   
-  postData(inputName, inputArea, inputDescription, inputSource, 
-    inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
-    inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-    inputCheckDate, inputFormat)
-
-  showMainContent() 
+   
 }
 
 function showInfo() {
