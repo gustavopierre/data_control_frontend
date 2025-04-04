@@ -275,6 +275,31 @@ function removeElement() {
     };
   }
 }
+/*
+  --------------------------------------------------------------------------------------
+  Function to edit the item from the list according to 
+  the click on the edit button
+  --------------------------------------------------------------------------------------
+*/
+function editElement() {
+  // get the edit button elements
+  let edit = document.getElementsByClassName("icon-button-edit");
+  let i;
+  for (i = 0; i < edit.length; i++) {
+    edit[i].onclick = function () {
+      // Go to the parent element of the button and then to the parent element of the div
+      let div = this.parentElement.parentElement;
+      // Get the content of the first cell (td) in the row (tr). It is the name of the data
+      const dataName = div.getElementsByTagName('td')[0].innerHTML;
+      console.log(dataName)
+      // Call the function to edit the item from the server
+      getData(dataName);
+      // Call the function to show the edit form
+      showEditDataContent()
+    }
+  }
+
+
 
 
 /*
@@ -584,6 +609,7 @@ const insertList = (name, area, permitted, coordinateSystem,
   
   
   removeElement()
+  editElement()
   
   
 }
