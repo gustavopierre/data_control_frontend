@@ -293,7 +293,7 @@ function editElement() {
       const dataName = div.getElementsByTagName('td')[0].innerHTML;
       console.log(dataName)
       // Call the function to edit the item from the server
-      getData(dataName);
+      data = getData(dataName);
       // Call the function to show the edit form
       showEditDataContent()
     }
@@ -609,7 +609,7 @@ const insertList = (name, area, permitted, coordinateSystem,
   
   
   removeElement()
-  editElement()
+  //editElement()
   
   
 }
