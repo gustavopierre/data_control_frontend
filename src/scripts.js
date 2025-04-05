@@ -666,6 +666,143 @@ function showMap(source) {
   });
 }
 
+/*
+  --------------------------------------------------------------------------------------
+  Function to get the bounding box of the data from the source
+  and show it on a map 
+  --------------------------------------------------------------------------------------
+*/
+
+const getBoundingBox = () => {
+    const source = document.getElementById("newSource").value;
+    console.log("Source URL:", source);
+
+    if (!source) {
+        if (!confirm("The 'Source' field must be filled with a valid API. Do you want to proceed?")) {
+            return;
+        }
+    }
+
+    const queryUrl = `${source}/query`;
+    const params = new URLSearchParams({
+        where: "1=1",
+        outFields: "*",
+        f: "json",
+        outSR: 4326,
+        resultRecordCount: 2000
+    });
+    //debug
+    console.log("Query URL:", `${queryUrl}?${params.toString()}`);
+
+
+    fetch(`${queryUrl}?${params.toString()}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load map data from ${queryUrl}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //debug
+            // Exibir o JSON original no console
+            console.log("Original JSON:", data);
+
+            const geoJsonData = {
+                type: 'FeatureCollection',
+                features: data.features.map(item => {
+                    let geometry = null;
+                    switch (data.geometryType) {
+                        case "esriGeometryPoint":
+                            geometry = {
+                                type: 'Point',
+                                coordinates: [item.geometry.x, item.geometry.y]
+                            };
+                            break;
+                        case "esriGeometryMultipoint":
+                            geometry = {
+                                type: 'Multipoint',
+                                coordinates: item.geometry.points
+                            };
+                            break;
+                        case 'esriGeometryPolyline':
+                            geometry = {
+                                type: 'MultiLineString',
+                                coordinates: item.geometry.paths
+                            };
+                            break;
+                        case 'esriGeometryPolygon':
+                            geometry = {
+                                type: 'Polygon',
+                                coordinates: item.geometry.rings
+                            };
+                            break;
+                        default:
+                            console.warn('Unsupported geometry type:', item.geometryType);
+                            return null;
+                    }
+                    return {
+                        type: "Feature",
+                        geometry: geometry,
+                        properties: item.attributes
+                    };
+                }).filter(feature => feature.geometry !== null)
+            };
+            //debug
+            console.log("Generated GeoJSON:", geoJsonData); // Verificar o GeoJSON gerado
+            const bounds = geoJsonData.features.reduce((bbox, feature) => {
+                const coords = feature.geometry.coordinates.flat(Infinity);
+                return [
+                    Math.min(bbox[0], ...coords.filter((_, i) => i % 2 === 0)), // minLon
+                    Math.min(bbox[1], ...coords.filter((_, i) => i % 2 !== 0)), // minLat
+                    Math.max(bbox[2], ...coords.filter((_, i) => i % 2 === 0)), // maxLon
+                    Math.max(bbox[3], ...coords.filter((_, i) => i % 2 !== 0))  // maxLat
+                ];
+            }, [Infinity, Infinity, -Infinity, -Infinity]);
+
+            const boundingBoxField = document.getElementById("newBoundingBox");
+            boundingBoxField.value = `${bounds[1]} ${bounds[0]}; ${bounds[3]} ${bounds[2]}`;
+
+            // Open a map window to show the bounding box
+            const mapWindow = window.open("", '_blank', "width=800, height=600");
+            mapWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Map Viewer</title>
+                        <style>
+                            #map { width: 100%; height: 100%; }
+                        </style>
+                        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+                    </head>
+                    <body>
+                        <div id="map"></div>
+                        <script>
+                            const map = L.map('map').setView([0, 0], 2);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+                            const geoJsonLayer = L.geoJSON(${JSON.stringify(geoJsonData)});
+                            geoJsonLayer.addTo(map);
+                            if (geoJsonLayer.getBounds().isValid()) {
+                                map.fitBounds(geoJsonLayer.getBounds());
+                            }
+                            
+                        </script>
+                    </body>
+                </html>
+            `);
+        })
+        .catch(error => {
+            console.error('Error loading map data', error);
+            alert("Failed to load map data.");
+        });
+};
+
+
+/*
+  --------------------------------------------------------------------------------------
+  Function to check the data, not implemented yet
+  --------------------------------------------------------------------------------------
+*/
+
 function checkData() {
   alert("Function not implemented yet!")
 }
