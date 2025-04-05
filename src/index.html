@@ -124,6 +124,27 @@
                     <label for="newInfo" class="labelForm"><strong>Info:</strong></label>
                     <input type="text" id="newInfo" placeholder="Info:" maxlength="255">
                 </div>
+                <div class="field">
+                    <label for="newBoundingBox" class="labelForm"><strong>Bounding Box:</strong></label>
+                    <input type="text" id="newBoundingBox" placeholder="minLat minLon; maxLat maxLon" maxlength="50" disabled>
+                </div>
+                <div class="field">
+                    <button id="getBoundingBoxButton" class="button" onclick="getBoundingBox()" disabled>Get BB from external API</button>
+                </div>
+                <script>
+                    document.getElementById("newFormat").addEventListener("change", function () {
+                        const boundingBoxField = document.getElementById("newBoundingBox");
+                        const getBBButton = document.getElementById("getBoundingBoxButton");
+                        if (this.value === "WFS") {
+                            boundingBoxField.disabled = false;
+                            getBBButton.disabled = false;
+                        } else {
+                            boundingBoxField.disabled = true;
+                            boundingBoxField.value = "";
+                            getBBButton.disabled = true;
+                        }
+                    });
+                </script>
                 <div class="buttons">
                     <button onclick="newData()" class="button">Add</button>
                     <!-- Novo botão para esconder e mostrar as divs -->
