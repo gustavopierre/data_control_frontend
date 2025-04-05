@@ -77,6 +77,54 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
     });
 } 
 
+/*
+  --------------------------------------------------------------------------------------
+  Function to update a data in the server list by PUT request
+  --------------------------------------------------------------------------------------
+*/
+
+const putData = (name, inputArea, inputDescription, inputSource, 
+  inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
+  inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+  inputCheckDate, inputFormat) => {
+  
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('area', inputArea);
+  formData.append('description', inputDescription);
+  formData.append('source', inputSource);
+  formData.append('creator', inputCreator);
+  formData.append('permitted', inputPermitted);
+  formData.append('copyright', inputCopyright);
+  formData.append('link', inputLink);
+  formData.append('info', inputInfo);
+  formData.append('coordinate_system', inputCoordinateSystem);
+  formData.append('creation_date', inputCreationDate);
+  formData.append('update_date', inputUpdateDate);
+  formData.append('check_date', inputCheckDate);
+  formData.append('format', inputFormat);
+
+  let url = 'http://localhost:5000/data';
+  fetch(url, {
+    method: 'put',
+    body: formData
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Data updated successfully!");
+        // Optionally, refresh the list or update the UI
+        getList();
+      } else if (response.status === 404) {
+        alert("Data not found!");
+      } else {
+        alert("Error updating data!");
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert("Failed to update data!");
+    });
+};
 
 /*
   --------------------------------------------------------------------------------------
@@ -447,7 +495,7 @@ const newData = () => {
   --------------------------------------------------------------------------------------
 */
 const saveEditedData = () => {
-  let inputName = document.getElementById("editName").value;
+  let name = document.getElementById("editName").value;
   let inputArea = document.getElementById("editArea").value;
   let inputDescription = document.getElementById("editDescription").value;
   let inputSource = document.getElementById("editSource").value;
@@ -461,18 +509,14 @@ const saveEditedData = () => {
   let inputUpdateDate = document.getElementById("editUpdateDate").value;
   let inputFormat = document.getElementById("editFormat").value;
   let inputCheckDate = new Date();
-  if (inputName === '') {
-    alert("Write the data name!");
-  } else if (inputArea === '') {
-    alert("Write the data area");
-  } else if (inputLink === '') {
+  if (inputLink === '') {
     alert("Write the data link");
   } else {
       // Call the function to insert the data in the server list
-    /*putData(inputName, inputArea, inputDescription, inputSource, 
+    putData(name, inputArea, inputDescription, inputSource, 
       inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
       inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-      inputCheckDate, inputFormat)*/
+      inputCheckDate, inputFormat)
       
     
     // Call the function to show the MainContent
