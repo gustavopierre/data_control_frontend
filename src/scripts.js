@@ -281,7 +281,7 @@ function removeElement() {
   the click on the edit button
   --------------------------------------------------------------------------------------
 */
-/*function editElement() {
+function editElement() {
   // get the edit button elements
   let edit = document.getElementsByClassName("icon-button-edit");
   let i;
@@ -294,10 +294,12 @@ function removeElement() {
       console.log(dataName)
       // Call the function to edit the item from the server
       data = getData(dataName);
+      console.log(data)
       // Call the function to show the edit form
       showEditDataContent()
     }
-  }*/
+  }
+}
 
 
 
@@ -611,7 +613,7 @@ const insertList = (name, area, permitted, coordinateSystem,
   
   
   removeElement()
-  //editElement()
+  editElement()
   
   
 }
@@ -638,7 +640,7 @@ function showMainContent() {
 
 function showEditDataContent() {
   // Esconde as divs newDataContent, mainContent, e infoDataContent
-  document.getElementById('newDataContent').classList.add('hidden');
+  //document.getElementById('newDataContent').classList.add('hidden');
   document.getElementById('mainContent').classList.add('hidden');
   document.getElementById('infoDataContent').classList.add('hidden');
   
