@@ -40,7 +40,7 @@ getList()
 const postData = async (inputName, inputArea, inputDescription, inputSource, 
   inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
   inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-  inputCheckDate, inputFormat) => {
+  inputCheckDate, inputFormat, inputUpdateFrequency, inputBoundingBox) => {
   const formData = new FormData();
   formData.append('name', inputName);
   formData.append('area', inputArea);
@@ -56,6 +56,8 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
   formData.append('update_date', inputUpdateDate);
   formData.append('check_date', inputCheckDate);
   formData.append('format', inputFormat);
+  formData.append('update_frequency_days', inputUpdateFrequency); // Novo campo
+  formData.append('bounding_box', inputBoundingBox); // Novo campo
 
   let url = 'http://localhost:5000/data';
   fetch(url, {
@@ -474,6 +476,8 @@ const newData = () => {
   let inputCreationDate = document.getElementById("newCreationDate").value;
   let inputUpdateDate = document.getElementById("newUpdateDate").value;
   let inputFormat = document.getElementById("newFormat").value;
+  let inputUpdateFrequency = document.getElementById("newUpdateFrequency").value; // Novo campo
+  let inputBoundingBox = document.getElementById("newBoundingBox").value; // Novo campo
   let inputCheckDate = new Date();
   if (inputName === '') {
     alert("Write the data name!");
@@ -486,7 +490,7 @@ const newData = () => {
     postData(inputName, inputArea, inputDescription, inputSource, 
       inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
       inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-      inputCheckDate, inputFormat)
+      inputCheckDate, inputFormat, inputUpdateFrequency, inputBoundingBox)
       
     
     // Call the function to show the MainContent
@@ -875,8 +879,6 @@ const insertList = (name, area, permitted, coordinateSystem,
   
   removeElement()
   editElement()
-  
-  
 }
 
 function openNewDataForm() {
@@ -886,7 +888,21 @@ function openNewDataForm() {
   document.getElementById('infoDataContent').classList.add('hidden');
   
   // Exibe a div newDataContent
+  document.getElementById("newUpdateFrequency").value = 90;
+  document.getElementById("newDescription").value = "";
+  document.getElementById("newBoundingBox").value = "";
+  document.getElementById("newCreationDate").value = "";
+  document.getElementById("newUpdateDate").value = "";
+  document.getElementById("newSource").value = "";
+  document.getElementById("newCreator").value = "";
+  document.getElementById("yes").checked=true;
+  document.getElementById("no").checked=false;
+  document.getElementById("newCopyright").value = "";
+  document.getElementById("newLink").value = "";
+  document.getElementById("newInfo").value = "";
+  document.getElementById("newName").value = "";
   document.getElementById('newDataContent').classList.remove('hidden');
+
 }
 
 function showMainContent() {
