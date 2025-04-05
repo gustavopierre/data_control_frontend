@@ -293,10 +293,40 @@ function editElement() {
       const dataName = div.getElementsByTagName('td')[0].innerHTML;
       console.log(dataName)
       // Call the function to edit the item from the server
-      data = getData(dataName);
-      console.log(data)
-      // Call the function to show the edit form
-      showEditDataContent()
+      getData(dataName)
+        .then((data) => {
+          if (data) {
+            // Fill the fields in the editDataContent div
+            document.getElementById("editName").value = data.name || "";
+            document.getElementById("editArea").value = data.area || "";
+            document.getElementById("editDescription").value = data.description || "";
+            document.getElementById("editLink").value = data.link || "";
+            document.getElementById("editFormat").value = data.format || "";
+            document.getElementById("editCoordinateSystem").value = data.coordinate_system || "";
+            document.getElementById("editSource").value = data.source || "";
+            document.getElementById("editCreator").value = data.creator || "";
+            document.getElementById("editCreationDate").value = data.creation_date || "";
+            document.getElementById("editUpdateDate").value = data.update_date || "";
+            document.getElementById("editCopyright").value = data.copyright || "";
+            document.getElementById("editInfo").value = data.info || "";
+    
+            // Set the permitted radio button
+            if (data.permitted) {
+              document.getElementById("yesEdit").checked = true;
+            } else {
+              document.getElementById("noEdit").checked = true;
+            }
+            // Show the editDataContent div
+            showEditDataContent();
+          } else {
+            console.error("Data not found for editing:", dataName);
+            alert("Dado nao achado!");
+          }
+        }) 
+        .catch((error) => {
+          console.error("Error fetching data for editing:", error);
+          alert("Erro ao buscar dados para edição!");
+        })     
     }
   }
 }
@@ -351,10 +381,15 @@ function getElement() {
 const getData = (name) => {
   console.log(name)
   let url = 'http://localhost:5000/data?name=' + name;
-  fetch(url, {
+  return fetch(url, {
     method: 'get'
   })
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error (`HTTP error! status: $response.status}`);
+    }
+    return response.json();
+  })
   .then((data) => {
     console.log(data, typeof data)
     return data;
