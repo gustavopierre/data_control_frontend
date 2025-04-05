@@ -5,6 +5,9 @@
 */
 const getList = async () => {
   let url = 'http://localhost:5000/dataset';
+
+  
+
   fetch(url, {
     method: 'get',
   })
@@ -62,8 +65,8 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
     .then((response) => {
       if (response.ok) {
         insertList(inputName, inputArea, inputPermitted, inputCoordinateSystem, inputCheckDate, inputFormat)
+        location.reload();
         alert("Data added!")
-        //getList()
       }
       else if (response.status == 409) {
         alert("Existing a Data with same name!")
@@ -104,17 +107,20 @@ const putData = (name, inputArea, inputDescription, inputSource,
   formData.append('check_date', inputCheckDate);
   formData.append('format', inputFormat);
 
-  let url = 'http://localhost:5000/data';
+  let url = 'http://localhost:5000/data?name=' + name;
   fetch(url, {
     method: 'put',
     body: formData
   })
     .then((response) => {
       if (response.ok) {
+        location.reload();
         alert("Data updated successfully!");
-        // Optionally, refresh the list or update the UI
-        getList();
+        //getList();
+
+        
       } else if (response.status === 404) {
+        console.log("Erro aqui (404)!");
         alert("Data not found!");
       } else {
         alert("Error updating data!");
@@ -679,7 +685,6 @@ function calculateDateDifferenceDays(checkDate) {
   // Retornar a string formatada
   return differenceInDaysAdjusted;
 }
-
 
 
 /*
