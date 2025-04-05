@@ -552,7 +552,7 @@ function showMap(source) {
     outFields: "*",
     f: "json", // Formato JSON
     outSR: 4326,
-    resultRecordCount: 2000
+    resultRecordCount: 3000
   });
 
   console.log("Query URL:", `${queryUrl}?${params.toString()}`);
