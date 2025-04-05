@@ -403,6 +403,46 @@ const newData = () => {
     // Call the function to show the MainContent
     showMainContent() 
   }
+}
+
+/*
+  --------------------------------------------------------------------------------------
+  Function to edit a item with name, area, format, description,
+  creator, source, permitted, copyRight, link, info, coordinateSystem, creationDate, updateDate, checkDate
+  --------------------------------------------------------------------------------------
+*/
+const saveEditedData = () => {
+  let inputName = document.getElementById("editName").value;
+  let inputArea = document.getElementById("editArea").value;
+  let inputDescription = document.getElementById("editDescription").value;
+  let inputSource = document.getElementById("editSource").value;
+  let inputCreator = document.getElementById("editCreator").value;
+  let inputPermitted = document.getElementById('yes').checked;
+  let inputCopyright = document.getElementById("editCopyright").value;
+  let inputLink = document.getElementById("editLink").value;
+  let inputInfo = document.getElementById("editInfo").value;
+  let inputCoordinateSystem = document.getElementById("editCoordinateSystem").value;
+  let inputCreationDate = document.getElementById("editCreationDate").value;
+  let inputUpdateDate = document.getElementById("editUpdateDate").value;
+  let inputFormat = document.getElementById("editFormat").value;
+  let inputCheckDate = new Date();
+  if (inputName === '') {
+    alert("Write the data name!");
+  } else if (inputArea === '') {
+    alert("Write the data area");
+  } else if (inputLink === '') {
+    alert("Write the data link");
+  } else {
+      // Call the function to insert the data in the server list
+    /*putData(inputName, inputArea, inputDescription, inputSource, 
+      inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
+      inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
+      inputCheckDate, inputFormat)*/
+      
+    
+    // Call the function to show the MainContent
+    showMainContent() 
+  }
   
    
 }
