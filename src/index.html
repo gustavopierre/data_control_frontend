@@ -202,7 +202,7 @@
                 </div>
                 <div class="field">
                     <label><strong>What is the data format?</strong></label><br>
-                    <select id="editFormat" name="newFormat">
+                    <select id="editFormat" name="editFormat">
                         <option value="SHP">Shapefile (SHP)</option>
                         <option value="GDB">Geodatabase (GDB)</option>
                         <option value="CSV">Comma-Separated Values (CSV)</option>
@@ -221,30 +221,30 @@
                 </div>               
                 <div class="field">
                     <label for="editSource" class="labelForm"><strong>Source:</strong></label>
-                    <input type="text" id="editSource" maxlength="140">
+                    <input type="text" id="editSource" name="editSource" maxlength="140">
                 </div>
                 <div class="field">
                     <label for="editCreator" class="labelForm"><strong>Creator:</strong></label>
-                    <input type="text" id="editCreator" maxlength="140">
+                    <input type="text" id="editCreator" name="editCreator" maxlength="140">
                 </div>
                 <div class="field">
                     <label for="editCreationDate" class="labelForm"><strong>Creation Date:</strong></label>
-                    <input type="date" id="editCreationDate">
+                    <input type="date" id="editCreationDate" name="editCreationDate">
                 </div>
                 <div class="field">
                     <label for="editUpdateDate" class="labelForm"><strong>Update Date:</strong></label>
-                    <input type="date" id="editUpdateDate">
+                    <input type="date" id="editUpdateDate" name="editUpdateDate">
                 </div>
                 <div class="field">
                     <label for="editCopyright" class="labelForm"><strong>Copyright:</strong></label>
-                    <input type="text" id="editCopyright" maxlength="140">    
+                    <input type="text" id="editCopyright" name="editCopyright" maxlength="140">    
                 </div>
                 <div class="field">
                     <label for="editInfo" class="labelForm"><strong>Info:</strong></label>
-                    <input type="text" id="editInfo" maxlength="255">
+                    <input type="text" id="editInfo" name="editInfo" maxlength="255">
                 </div>
                 <div class="buttons">
-                    <button onclick="saveData()" class="button">Save</button>
+                    <button onclick="saveEditedData()" class="button">Save</button>
                     <!-- Novo botão para esconder e mostrar as divs -->
                     <button onclick="showMainContent()" class="button">Cancel</button>
                 </div>            
