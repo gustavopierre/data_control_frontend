@@ -2,20 +2,9 @@
 A aplicação Data Control teve origem como MVP da Sprint **Desenvolvimento Full Stack Básico** e foi complementada para atender o MVP da Sprint **Arquitetura de Software** do curso de Pós-Graduação em Engenharia de Software da PUC-Rio.
 A aplicacao controla os dados utilizados para serem camadas de mapas em softwares de GIS. O fluxograma abaixo mostra como a aplicacao funciona:
 
-```mermaid
-flowchart LR
-    subgraph FE [Interface (Front-End)]
-        docker1((🐳))
-    end
-    
-    subgraph BE [API (Back-End)]
-        docker2((🐳))
-    end
-
-    FE -- REST ou GraphQL --> BE
-    BE --> DB[(Banco de Dados)]
-    APIExterna([API Externa<br/>(ex: Yahoo Finance,<br/>Fake Store)]) --> FE
-````
+<p align="center">
+  <img src="src\img\cenario.png" alt="Arquitetura do sistema" width="400"/>
+</p>
 
 Sua função é o frontend de um sistema de controle dos dados usados para serem camadas (layers) nos softwares de geoprocessamento. As principais tecnologias utilizadas são:
 
