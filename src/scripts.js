@@ -91,7 +91,7 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
 const putData = (name, inputArea, inputDescription, inputSource, 
   inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
   inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-  inputCheckDate, inputFormat) => {
+  inputCheckDate, inputFormat, inputUpdateFrequency, inputBoundingBox) => {
   
   const formData = new FormData();
   formData.append('name', name);
@@ -108,6 +108,8 @@ const putData = (name, inputArea, inputDescription, inputSource,
   formData.append('update_date', inputUpdateDate);
   formData.append('check_date', inputCheckDate);
   formData.append('format', inputFormat);
+  formData.append('update_frequency_days', inputUpdateFrequency); // Novo campo
+  formData.append('bounding_box', inputBoundingBox); // Novo campo
 
   let url = 'http://localhost:5000/data?name=' + name;
   fetch(url, {
@@ -219,7 +221,7 @@ const insertButtonEdit = (parent) => {
   // Criar o elemento button
   let button = document.createElement("button");
   button.className = "icon-button-edit";
-  button.onclick = showEdit;
+  //button.onclick = showEdit;
   // Criar o elemento img
   let img = document.createElement("img");
   img.src = "img/pen.png";
@@ -365,12 +367,19 @@ function editElement() {
             document.getElementById("editUpdateDate").value = data.update_date || "";
             document.getElementById("editCopyright").value = data.copyright || "";
             document.getElementById("editInfo").value = data.info || "";
+            document.getElementById("editBoundingBox").value = data.bounding_box || "";
+            document.getElementById("editUpdateFrequency").value = data.update_frequency_days || 90; // Novo campo
     
             // Set the permitted radio button
             if (data.permitted) {
               document.getElementById("yesEdit").checked = true;
             } else {
               document.getElementById("noEdit").checked = true;
+            }
+            if (data.format === "WFS") {
+              document.getElementById("getBoundingBoxEditButton").disabled = false;
+            } else {
+              document.getElementById("getBoundingBoxEditButton").disabled = true;
             }
             // Show the editDataContent div
             showEditDataContent();
@@ -518,6 +527,8 @@ const saveEditedData = () => {
   let inputCreationDate = document.getElementById("editCreationDate").value;
   let inputUpdateDate = document.getElementById("editUpdateDate").value;
   let inputFormat = document.getElementById("editFormat").value;
+  let inputUpdateFrequency = document.getElementById("editUpdateFrequency").value; // Novo campo
+  let inputBoundingBox = document.getElementById("editBoundingBox").value; // Novo campo
   let inputCheckDate = new Date();
   if (inputLink === '') {
     alert("Write the data link");
@@ -526,7 +537,7 @@ const saveEditedData = () => {
     putData(name, inputArea, inputDescription, inputSource, 
       inputCreator, inputPermitted, inputCopyright, inputLink, inputInfo,
       inputCoordinateSystem, inputCreationDate, inputUpdateDate, 
-      inputCheckDate, inputFormat)
+      inputCheckDate, inputFormat, inputUpdateFrequency, inputBoundingBox)
       
     
     // Call the function to show the MainContent
@@ -669,6 +680,136 @@ function showMap(source) {
     alert(`Failed to load map data.`);
   });
 }
+
+/*
+  --------------------------------------------------------------------------------------
+  Function to get the bounding box on edit form of the data from the source
+  and show it on a map 
+  --------------------------------------------------------------------------------------
+*/
+
+const getBoundingBoxEdit = () => {
+  const source = document.getElementById("editSource").value;
+  console.log("Source URL:", source);
+
+  if (!source) {
+      if (!confirm("The 'Source' field must be filled with a valid API. Do you want to proceed?")) {
+          return;
+      }
+  }
+
+  const queryUrl = `${source}/query`;
+  const params = new URLSearchParams({
+      where: "1=1",
+      outFields: "*",
+      f: "json",
+      outSR: 4326,
+      resultRecordCount: 2000
+  });
+  //debug
+  console.log("Query URL:", `${queryUrl}?${params.toString()}`);
+
+
+  fetch(`${queryUrl}?${params.toString()}`)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`Failed to load map data from ${queryUrl}`);
+          }
+          return response.json();
+      })
+      .then(data => {
+          //debug
+          // Exibir o JSON original no console
+          console.log("Original JSON:", data);
+
+          const geoJsonData = {
+              type: 'FeatureCollection',
+              features: data.features.map(item => {
+                  let geometry = null;
+                  switch (data.geometryType) {
+                      case "esriGeometryPoint":
+                          geometry = {
+                              type: 'Point',
+                              coordinates: [item.geometry.x, item.geometry.y]
+                          };
+                          break;
+                      case "esriGeometryMultipoint":
+                          geometry = {
+                              type: 'Multipoint',
+                              coordinates: item.geometry.points
+                          };
+                          break;
+                      case 'esriGeometryPolyline':
+                          geometry = {
+                              type: 'MultiLineString',
+                              coordinates: item.geometry.paths
+                          };
+                          break;
+                      case 'esriGeometryPolygon':
+                          geometry = {
+                              type: 'Polygon',
+                              coordinates: item.geometry.rings
+                          };
+                          break;
+                      default:
+                          console.warn('Unsupported geometry type:', item.geometryType);
+                          return null;
+                  }
+                  return {
+                      type: "Feature",
+                      geometry: geometry,
+                      properties: item.attributes
+                  };
+              }).filter(feature => feature.geometry !== null)
+          };
+          //debug
+          console.log("Generated GeoJSON:", geoJsonData); // Verificar o GeoJSON gerado
+          const bounds = geoJsonData.features.reduce((bbox, feature) => {
+              const coords = feature.geometry.coordinates.flat(Infinity);
+              return [
+                  Math.min(bbox[0], ...coords.filter((_, i) => i % 2 === 0)), // minLon
+                  Math.min(bbox[1], ...coords.filter((_, i) => i % 2 !== 0)), // minLat
+                  Math.max(bbox[2], ...coords.filter((_, i) => i % 2 === 0)), // maxLon
+                  Math.max(bbox[3], ...coords.filter((_, i) => i % 2 !== 0))  // maxLat
+              ];
+          }, [Infinity, Infinity, -Infinity, -Infinity]);
+
+          const boundingBoxField = document.getElementById("editBoundingBox");
+          boundingBoxField.value = `${bounds[1]} ${bounds[0]}; ${bounds[3]} ${bounds[2]}`;
+
+          // Open a map window to show the bounding box
+          const mapWindow = window.open("", '_blank', "width=800, height=600");
+          mapWindow.document.write(`
+              <html>
+                  <head>
+                      <title>Map Viewer</title>
+                      <style>
+                          #map { width: 100%; height: 100%; }
+                      </style>
+                      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+                      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+                  </head>
+                  <body>
+                      <div id="map"></div>
+                      <script>
+                          const map = L.map('map').setView([0, 0], 2);
+                          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+                          const geoJsonLayer = L.geoJSON(${JSON.stringify(geoJsonData)});
+                          geoJsonLayer.addTo(map);
+                          if (geoJsonLayer.getBounds().isValid()) {
+                              map.fitBounds(geoJsonLayer.getBounds());
+                          }
+                          
+                      </script>
+                  </body>
+              </html>
+          `);
+      })
+      .catch(error => {
+          console.error('Error loading map data', error);
+          alert("Failed to load map data.");
+      });
+};
 
 /*
   --------------------------------------------------------------------------------------
@@ -934,4 +1075,17 @@ function showInfoDataContent() {
   // Exibe a div infoDataContent
   document.getElementById('infoDataContent').classList.remove('hidden');
 }
+
+document.getElementById("editFormat").addEventListener("change", function () {
+    const boundingBoxField = document.getElementById("editBoundingBox");
+    const getBBButton = document.getElementById("getBoundingBoxEditButton");
+    if (this.value === "WFS") {
+        boundingBoxField.disabled = false;
+        getBBButton.disabled = false;
+    } else {
+        boundingBoxField.disabled = true;
+        boundingBoxField.value = "";
+        getBBButton.disabled = true;
+    }
+});
 
