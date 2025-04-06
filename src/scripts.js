@@ -16,7 +16,7 @@ const getList = async () => {
       console.log("Data received from server:", data);
       data.dataset.forEach(item => insertList(item.name, item.area, 
         item.permitted, item.coordinate_system, item.check_date, 
-        item.format, item.source))
+        item.format, item.source, item.update_frequency_days));
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -66,7 +66,7 @@ const postData = async (inputName, inputArea, inputDescription, inputSource,
   })
     .then((response) => {
       if (response.ok) {
-        insertList(inputName, inputArea, inputPermitted, inputCoordinateSystem, inputCheckDate, inputFormat)
+        insertList(inputName, inputArea, inputPermitted, inputCoordinateSystem, inputCheckDate, inputFormat, inputUpdateFrequency )
         location.reload();
         alert("Data added!")
       }
@@ -160,6 +160,32 @@ const insertButtonCheckGreen = (parent) => {
   // Anexar button ao elemento pai
   parent.appendChild(button);
 };
+
+/*
+  --------------------------------------------------------------------------------------
+  Function to create a check button with orange icon
+  for each item in the list 
+  --------------------------------------------------------------------------------------
+*/
+const insertButtonCheckOrange = (parent) => {
+  // Criar o elemento button
+  let button = document.createElement("button");
+  button.className = "icon-button-check";
+  button.onclick = checkData;
+
+  // Criar o elemento img
+  let img = document.createElement("img");
+  img.src = "img/check_orange.png";
+  img.alt = "Button with a red check icon";
+  img.title = "Check"; // Usando title como hint
+
+  // Anexar img ao button
+  button.appendChild(img);
+
+  // Anexar button ao elemento pai
+  parent.appendChild(button);
+};
+
 
 /*
   --------------------------------------------------------------------------------------
@@ -975,15 +1001,19 @@ function calculateDateDifferenceDays(checkDate) {
   --------------------------------------------------------------------------------------
 */
 const insertList = (name, area, permitted, coordinateSystem, 
-  checkDate, format, source) => {
+  checkDate, format, source, updateFrequency) => {
   
-  var data = [name, area, permitted, coordinateSystem, format, checkDate];
+  var data = [name, area, permitted, coordinateSystem, format, checkDate, updateFrequency];
 
   var differenceInDaysAdjusted = calculateDateDifferenceDays(checkDate);
   // 5. Verificar o número de dias para definir a unidade
   var dayOrDays = differenceInDaysAdjusted <= 1 ? "day" : "days";
   // 6. Atualizar o valor de checkDate com a diferença e a unidade
   data[5] = `${differenceInDaysAdjusted} ${dayOrDays}`;
+  var daysUntilNextUpdate = updateFrequency - differenceInDaysAdjusted;
+  dayOrDays = daysUntilNextUpdate == 1 ? "day" : "days";
+  data[6] = `${daysUntilNextUpdate} ${dayOrDays}`;
+
   var table = document.getElementById('myTable');
   var row = table.insertRow();
 
@@ -992,15 +1022,19 @@ const insertList = (name, area, permitted, coordinateSystem,
     var cel = row.insertCell(i);
     cel.textContent = data[i];
   }
-  if (differenceInDaysAdjusted <= 90) {
+
+  if (daysUntilNextUpdate > 21) {
     insertButtonCheckGreen(row.insertCell(-1))
-  } else {
+  } else if (daysUntilNextUpdate <= 7) {
       insertButtonCheckRed(row.insertCell(-1))
+  } else {
+    insertButtonCheckOrange(row.insertCell(-1))
   }
-  insertButtonDelete(row.insertCell(-1))
-  insertButtonEdit(row.insertCell(-1))
-  insertButtonInfo(row.insertCell(-1))
-  insertButtonView(row.insertCell(-1), format, source)
+
+  insertButtonDelete(row.insertCell(-1));
+  insertButtonEdit(row.insertCell(-1));
+  insertButtonInfo(row.insertCell(-1));
+  insertButtonView(row.insertCell(-1), format, source);
 
   // Mostra somente a div com a tabela visivel
   document.getElementById("newName").value = "";
