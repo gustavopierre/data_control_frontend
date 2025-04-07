@@ -1,4 +1,4 @@
-# Frontend Data Control
+# Data Control Frontend 
 ## Introducao
 A aplicação Data Control teve origem como MVP da Sprint **Desenvolvimento Full Stack Básico** e foi complementada para atender o MVP da Sprint **Arquitetura de Software** do curso de Pós-Graduação em Engenharia de Software da PUC-Rio.
 A aplicacao controla os dados utilizados para serem camadas de mapas em softwares de GIS na empresa em que trabalho. Identifiquei, ha algum tempo, que os dados sao dinamicos e os mapas devem ser o mais atualizados possivel. Nao existia uma politica de frequencia de atualizacao desses dados. Com a aplicacao DataControl, cada dado recebe uma informacao de qual a frequencia, em dias, que cada dado deve ser atualizado. Na versao atual, ele mostra na lista de dados, em quantos dias cada dado deve ser checado quanto a existencia de atualizacao. Quando o dado é do tipo Web Feature Server (WFS), o dado do bounding box dos dados geográficos é obtido via API REST externa, cujo link consta como um dos campos de informação daquele dado. A arquitetura da aplicação é representada visualmente na figura abaixo:
@@ -12,7 +12,7 @@ A aplicacao controla os dados utilizados para serem camadas de mapas em software
 ## Componentes
 Os componentes da aplicação são:
 
- - Frontend - Interface que acessa a [API Data Control](https://github.com/gustavopierre/data_control_API), exibindo uma lista de dados utilizados nos softwares de GIS, com informações básicas e, principalmente, há quantos dias foi a última checagem e quantos dias faltam para que seja realizada a próxima verificação. Existe um botão para inserir um novo dado no banco de dados e, cada registro na lista, tem botões que permitem:
+ - Frontend - Interface que acessa a [Data Control API](https://github.com/gustavopierre/data_control_API), exibindo uma lista de dados utilizados nos softwares de GIS, com informações básicas e, principalmente, há quantos dias foi a última checagem e quantos dias faltam para que seja realizada a próxima verificação. Existe um botão para inserir um novo dado no banco de dados e, cada registro na lista, tem botões que permitem:
      - Considerar checado o dado, renovando assim a data da última checagem e a quantidade de dias para a próxima checagem.
      - Excluir um dado do banco de dados.
      - Editar as informações de um dado selecionado, inclusive o retângulo envolvente (bounding box), obtido pela API externa, caso o dado seja do tipo Web Feature Server (WFS) compatível com o formato JSON da ESRI, que é, atualmente, a maioria dos dados WFS utilizados na empresa.
@@ -23,10 +23,10 @@ Os componentes da aplicação são:
  - API externa - A interface possibilita o acesso a APIs externas de dados cadastrados do tipo Web Feature Server (WFS) compatível com o formato JSON da ESRI, salvando o retângulo envolvente (bounding box) de um dado novo ou alterando-o, de um dado existente, em virtude de sua atualização.
 
 ## Docker
-A aplicação pode ser clonada do GitHub e executada criando um ambiente com os devidos requisitos ou utilizando containers [Docker](https://www.docker.com/). Criam-se duas imagens, uma para o frontend e outra para o backend, conforme instruções nos respectivos repositórios, e executam-se essas imagens. Os arquivos README.md tem intrucoes para criacao das imagens, execucao delas e execucao do frontend e do backend.
+A aplicação pode ser clonada do GitHub e executada criando um ambiente com os devidos requisitos ou utilizando containers [Docker](https://www.docker.com/). Criam-se duas imagens, uma para o frontend e outra para o backend, conforme instruções nos respectivos repositórios, e executam-se essas imagens. Os arquivos README.md têm instruções para criação das imagens, execução delas e execução do frontend ou do backend.
 
 ## Detalhamento
-O Frontend Data Control e o frontedn da aplicacao de controle dos dados usados para serem camadas (layers) nos softwares de geoprocessamento. As principais tecnologias utilizadas são:
+O Frontend Data Control é o frontend da aplicação de controle dos dados usados para serem camadas (layers) nos softwares de geoprocessamento. As principais tecnologias utilizadas são:
 
  - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
  - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
@@ -34,7 +34,7 @@ O Frontend Data Control e o frontedn da aplicacao de controle dos dados usados p
  - [Leaflet](https://leafletjs.com/reference.html)
  - [Docker](https://www.docker.com/)
 
-### *Execucao*
+### *Execução*
 #### 1) Sem Docker
 Uma vez a [API Data Control](https://github.com/gustavopierre/data_control_API) estiver executando localmente sem Docker,conforme intrucoes no repositorio, basta clonar o repositorio para a maquina local e abrir o arquivo sr/index.html no browser de sua preferencia.
 
