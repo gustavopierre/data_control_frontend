@@ -36,7 +36,7 @@ O Frontend Data Control é o frontend da aplicação de controle dos dados usado
 
 ### *Execução*
 #### 1) Sem Docker
-Uma vez a [API Data Control](https://github.com/gustavopierre/data_control_API) estiver executando localmente sem Docker,conforme intrucoes no repositorio, basta clonar o repositorio para a maquina local e abrir o arquivo sr/index.html no browser de sua preferencia.
+Uma vez a [API Data Control](https://github.com/gustavopierre/data_control_API) estiver executando localmente sem Docker, conforme **instruções** no repositório, basta clonar o repositório para a máquina local e abrir o arquivo **src/index.html** no navegadoir de sua preferência.
 
 #### 2) Usando Docker
 
@@ -105,7 +105,7 @@ Para acessar o frontend, basta abrir o [http://localhost:8080/](http://localhost
 
 #### Botão Get BB from External API
 <img src="src\img\getBBfromexternalAPIButton.jpg" alt="Get BB from External API"/>
-- Abre uma visualização do dado no mapa (apenas para dados do tipo Web Feature Server - WFS). O botao acessa a API externa constante no campo source do dado, converte o JSON em GeoJSON, exibe o dado num mapa, calcula as coordenadas do retangulo envolvente (bounding box) e adiciona ao campo correspondente no formulario.
+- Abre uma visualização do dado no mapa (apenas para dados do tipo Web Feature Server - WFS). O botão acessa a API externa constante no campo source do dado, converte o JSON em GeoJSON, exibe o dado num mapa, calcula as coordenadas do retângulo envolvente (bounding box) e adiciona ao campo correspondente no formulário.
 
 #### Botão Add Data
 <img src="src\img\AddButton.jpg" alt="Botao com Add escrito"/>
