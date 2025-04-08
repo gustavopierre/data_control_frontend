@@ -94,7 +94,7 @@ Para acessar o frontend, basta abrir o [http://localhost:8080/](http://localhost
 - Abre uma visualização do dado no mapa (apenas para dados do tipo Web Feature Server - WFS). O botao acessa a API externa constante no campo source do dado, converte o JSON em GeoJSON e exibe o dado num mapa.
 
 <br>A [Data Control API](https://github.com/gustavopierre/data_control_API) possui um banco de dados populado com alguns poucos exemplos para testar o acesso à API externa usando o frontend.
-<br>As APIs externas são de fontes reais utilizadas por empresas de Planejamento de Energia Renovável para avaliação de áreas apropriadas para instalação de fazendas solares e eólicas. Como por exemplo: [An Bord Pleanala](https://www.pleanala.ie/en-ie/home) e sua [API](https://services-eu1.arcgis.com/o56BSnENmD5mYs3j/ArcGIS/rest/services/Cases_2016_Onwards/FeatureServer/3) que retorna as Aplicações Planejadas na Irlanda.
+<br>As APIs externas são de fontes reais utilizadas por empresas de Planejamento de Energia Renovável para avaliação de áreas apropriadas para instalação de fazendas solares e eólicas. Como por exemplo: [Road Strategy Wicklow County Development Plan 2022 - 2028](https://www.wicklow.ie/Living/CDP2021) e sua [API](https://services.arcgis.com/hQOfkHGHCu8mgDpG/ArcGIS/rest/services/Road%20Strategy_CDP_2022_2028/FeatureServer/0) que retorna as dados de Planejamento Estratégico referente a estradas do Condado de Wicklow, na Irlanda.
 <br>As APIs externas têm formato JSON de retorno, que é transformado em GeoJSON e exibido num mapa usando a biblioteca Leaflet.
   
 <p align="center">
